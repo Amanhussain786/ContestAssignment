@@ -3,34 +3,26 @@ package com.driver.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "payment")
-public class Payment {
-
+public class Payment
+{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    private Boolean paymentCompleted;
+    private boolean paymentCompleted;
 
-    @Enumerated(value = EnumType.STRING)
     private PaymentMode paymentMode;
 
-    @OneToOne
-    @JoinColumn
-    Reservation reservation;
-
-    // MAKE CONSTRUCTOR AND GETTER/SETTER
-
-
-    public Payment() {
-    }
-
-    public Payment(int id, Boolean paymentCompleted, PaymentMode paymentMode, Reservation reservation) {
+    public Payment(int id, boolean paymentCompleted, PaymentMode paymentMode) {
         this.id = id;
         this.paymentCompleted = paymentCompleted;
         this.paymentMode = paymentMode;
-        this.reservation = reservation;
     }
+
+    public Payment() {}
+
+    @OneToOne
+    @JoinColumn Reservation reservation;
 
     public int getId() {
         return id;
@@ -40,11 +32,11 @@ public class Payment {
         this.id = id;
     }
 
-    public Boolean isPaymentCompleted() {
+    public boolean isPaymentCompleted() {
         return paymentCompleted;
     }
 
-    public void setPaymentCompleted(Boolean paymentCompleted) {
+    public void setPaymentCompleted(boolean paymentCompleted) {
         this.paymentCompleted = paymentCompleted;
     }
 
